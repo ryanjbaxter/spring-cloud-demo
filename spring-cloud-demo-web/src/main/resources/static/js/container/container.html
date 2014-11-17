@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="header">
+  <ul class="nav nav-pills pull-right">
+    <li class="active"><a href="#">Home</a></li>
+    <li ng-class="{active: location.path() == '/login'}" ng-show="!isAuthenticated"><a href="api/login">Login</a></li>
+    <li ng-show="isAuthenticated"><a ng-click="logout()">Logout</a></li>
+  </ul>
+  <h3 class="text-muted">Spring Cloud Demo</h3>
+</div>
+
+  <div class="jumbotron">
+    <h1>Sample</h1>
+    <p class="lead">Sample demonstrating how to use the spring cloud libraries.</p>
+  </div>
+  
+  <!-- <div ng-view></div> -->
+  <div ui-view></div>
+
+  <div class="footer">
+    <p>&copy; Company 2014</p>
+  </div>
+
+</div> <!-- /container -->

@@ -65,10 +65,11 @@ public class App implements EmbeddedServletContainerCustomizer {
 
 class SecureRequestMatcher implements RequestMatcher {
   private Pattern allowedMethods = Pattern.compile("^(POST|PUT|DELETE|HEAD|TRACE|OPTIONS)$");
+  private Pattern allowedStatusApis = Pattern.compile("^(/api/status/?[A-za-z0-9]*)$");
   @Override
   public boolean matches(HttpServletRequest request) {
     boolean result = "/api/login".equalsIgnoreCase(request.getRequestURI()) || "/api/logout".equalsIgnoreCase(request.getRequestURI()) ||
-            ("/api/status".equalsIgnoreCase(request.getRequestURI()) && allowedMethods.matcher(request.getMethod()).matches());
+            (allowedStatusApis.matcher(request.getRequestURI()).matches() && allowedMethods.matcher(request.getMethod()).matches());
     return result;
   }
   
@@ -78,9 +79,9 @@ class AnonRequestMatcher implements RequestMatcher {
 
   @Override
   public boolean matches(HttpServletRequest request) {
-    boolean result = "/api/status".equalsIgnoreCase(request.getRequestURI()) && request.getMethod().equals("GET");
+    boolean result = "/api/status".equalsIgnoreCase(request.getRequestURI()) && request.getMethod().equals("GET") || 
+            "/csrf".equalsIgnoreCase(request.getRequestURI()) && request.getMethod().equals("GET");
     return result;
   }
   
 }
-

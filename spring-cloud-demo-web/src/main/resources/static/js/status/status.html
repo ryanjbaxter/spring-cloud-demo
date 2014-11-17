@@ -1,5 +1,5 @@
 <div class="input-group input-group-lg" ng-show="isAuthenticated">
-  <input type="text" class="form-control" ng-model="status.msg" placeholder="Status">
+  <input type="text" class="form-control" ng-model="status.status" placeholder="Status">
   <span class="input-group-btn">
     <button class="btn btn-default" type="button" ng-click="submit()">Add</button>
   </span>
@@ -10,7 +10,7 @@
 </div>
 <table class="table table-hover status-table">
   <tr ng-repeat="status in statuses">
-    <td style="width: 100%">{{status.msg}}</td>
-  	<td><span class="glyphicon glyphicon-trash" ng-click="delete(status, $index)"></span><td>
+    <td style="width: 100%">{{status.status}}</td>
+  	<td><span class="glyphicon glyphicon-trash" ng-click="delete(status, $index)" ng-show="isAuthenticated"></span><td>
    <tr>
 </table> 

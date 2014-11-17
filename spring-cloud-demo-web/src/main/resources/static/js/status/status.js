@@ -1,19 +1,19 @@
 
 angular.module('statusApp.status', ['statusApp.services'])
-.config(['$routeProvider', function ($routeProvider) {
-  $routeProvider.otherwise({
-    templateUrl: 'js/status/status.html',
-    controller: 'StatusController'
+.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  $stateProvider.state('home.status', {
+    "templateUrl": "js/status/status.html",
+    "controller": "StatusController"
   });
 }])
-.controller('StatusController', ['$scope', 'StatusService', 'AuthService', '$rootScope', function($scope, StatusService, AuthService, $rootScope) {
-  $scope.isAuthenticated = AuthService.isAuthenticated();
+.controller('StatusController', ['$scope', 'StatusService', 'AuthService', '$rootScope', '$http', '$cookieStore',
+                                 function($scope, StatusService, AuthService, $rootScope, $http, $cookieStore) {
   $scope.status = {};
   $scope.statuses = StatusService.query();
   $scope.submit = function() {
 	StatusService.save($scope.status).$promise.then(function(savedStatus) {
 	  $scope.statuses.push(savedStatus);
-	  $scope.status.msg = '';
+	  $scope.status.status = '';
 	}, function(err) {
 	  console.error(err);
 	});  
@@ -26,8 +26,4 @@ angular.module('statusApp.status', ['statusApp.services'])
       console.error(err);
     })
   };
-  
-  $scope.$on('logout', function(event, msg) {
-    $scope.isAuthenticated = AuthService.isAuthenticated();
-  });
 }]);

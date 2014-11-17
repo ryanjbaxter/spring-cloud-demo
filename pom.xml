@@ -73,5 +73,6 @@
   	<module>spring-cloud-demo-eureka</module>
   	<module>spring-cloud-demo-status</module>
   	<module>spring-cloud-demo-web</module>
+  	<module>spring-cloud-demo-hystrix</module>
   </modules>
 </project>
