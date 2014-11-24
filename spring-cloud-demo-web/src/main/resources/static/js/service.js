@@ -44,7 +44,12 @@ services.factory("AuthService", ['$resource', '$cookies', '$rootScope', '$cookie
 	      delete $cookies['csrfHeader'];
 	      delete $cookies['csrfToken'];
 	      delete $cookies['user'];
-	      $rootScope.$broadcast('logout', {});
+	      $http.get('/logout').success(function(data, status, headers, config) {
+	        $rootScope.$broadcast('logout', {});
+	      }).
+	      error(function(data, status, headers, config) {
+	        
+	      });
 	    }
 	  };
 	}]);
