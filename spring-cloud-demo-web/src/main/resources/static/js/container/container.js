@@ -4,7 +4,10 @@ angular.module('statusApp.container', ['statusApp.services'])
   $stateProvider.state('home', {
     "url": '/home',
     "templateUrl": "js/container/container.html",
-    "controller" : function($scope, $state, AuthService, isAuthenticated) {
+    "controller" : function($scope, $state, AuthService, $rootScope, isAuthenticated) {
+      $rootScope.$on('logout', function(event) {
+        $scope.isAuthenticated = false;
+      });
       $scope.logout = function() {
         AuthService.logout();
         $scope.isAuthenticated = false;
