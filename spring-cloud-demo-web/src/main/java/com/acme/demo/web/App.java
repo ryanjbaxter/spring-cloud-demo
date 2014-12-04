@@ -5,17 +5,12 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.catalina.Context;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.tomcat.TomcatContextCustomizer;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.cloud.security.sso.EnableOAuth2Sso;
-import org.springframework.cloud.security.sso.OAuth2SsoConfigurerAdapter;
+import org.springframework.cloud.security.oauth2.sso.EnableOAuth2Sso;
+import org.springframework.cloud.security.oauth2.sso.OAuth2SsoConfigurerAdapter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,7 +24,7 @@ import org.springframework.stereotype.Component;
 @EnableZuulProxy
 @EnableEurekaClient
 @EnableOAuth2Sso
-public class App implements EmbeddedServletContainerCustomizer {
+public class App {
 
   public static void main(String[] args) {
     SpringApplication.run(App.class, args);
@@ -50,16 +45,6 @@ public class App implements EmbeddedServletContainerCustomizer {
       http.requestMatcher(new AnonRequestMatcher()).anonymous();
     }
     
-  }
-
-  @Override
-  public void customize(ConfigurableEmbeddedServletContainer container) {
-    ((TomcatEmbeddedServletContainerFactory) container).addContextCustomizers(new TomcatContextCustomizer() {
-        @Override
-        public void customize(Context context) {
-            context.setUseHttpOnly(false);
-        }
-    });
   }
 }
 

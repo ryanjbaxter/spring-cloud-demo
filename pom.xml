@@ -9,15 +9,15 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.1.8.RELEASE</version>
+    <version>1.2.0.RC2</version>
   </parent>
   
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starters</artifactId>
-        <version>1.0.0.M2</version>
+        <artifactId>spring-cloud-starter-parent</artifactId>
+        <version>1.0.0.M3</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -74,5 +74,6 @@
   	<module>spring-cloud-demo-status</module>
   	<module>spring-cloud-demo-web</module>
   	<module>spring-cloud-demo-hystrix</module>
+  	<module>spring-cloud-feign-rest</module>
   </modules>
 </project>

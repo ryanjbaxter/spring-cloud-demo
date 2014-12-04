@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.acme</groupId>
+    <artifactId>spring-cloud-demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>spring-cloud-feign-rest</artifactId>
+  
+    <properties>
+    <packaging.type>jar</packaging.type>
+  </properties>
+  
+  <!-- ====================================================================== -->
+  <!-- D E P E N D E N C I E S -->
+  <!-- ====================================================================== -->
+  <dependencies>
+  	<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-eureka</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.netflix.feign</groupId>
+      <artifactId>feign-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.netflix.feign</groupId>
+      <artifactId>feign-ribbon</artifactId>
+    </dependency>
+  </dependencies>
+  
+  
+  <!-- ====================================================================== -->
+  <!-- P R O F I L E S -->
+  <!-- ====================================================================== -->
+  <profiles>
+    <profile>
+      <id>run</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>2.5</version>
+            <executions>
+              <execution>
+                <id>auto-clean</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>clean</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+  
+  <!-- ====================================================================== -->
+  <!-- B U I L D -->
+  <!-- ====================================================================== -->
+  <!-- Package as an executable jar -->
+  <build>
+    <defaultGoal>package</defaultGoal>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
